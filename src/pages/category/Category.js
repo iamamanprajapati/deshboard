@@ -13,25 +13,39 @@ import Fade from '@material-ui/core/Fade';
 import useStyles from './style'
 import { Paper, Box, TextField, Typography, InputAdornment } from '@material-ui/core';
 import CategoryIcon from '@material-ui/icons/Category';
-import { useSelector } from 'react-redux'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { addCategory } from '../../actions/category.action'
 
 
 export default function Category() {
     const classes = useStyles();
 
     const [page, setpage] = useState(0)
+    const [categoryname, setcategoryname] = useState('')
+    const [categoryimage, setcategoryimage] = useState('')
     const [rowsperpage, setrowsperpage] = useState(10)
     const categories = useSelector((state) => state.categories);
     const categoryList = categories.category
     console.log(categories)
 
+    const dispatch = useDispatch();
+
     const [open, setOpen] = React.useState(false);
 
-
     const handleClose = () => {
+        const form = new FormData();
+        form.append('categoryName', categoryname)
+        form.append('categoryImage', categoryimage)
+        dispatch(addCategory(form))
+        setcategoryname('');
+        setcategoryimage('');
         setOpen(false);
-    };
+    }
+
+
+    // const handleClose = () => {
+    //     setOpen(false);
+    // };
 
     const onChangePage = (event, nextPage) => {
         setpage(nextPage)
@@ -41,6 +55,9 @@ export default function Category() {
         setrowsperpage(event.target.value)
     }
 
+    const handleCategoryImage = (e) => {
+        setcategoryimage(e.target.file)
+    }
 
     return (
 
@@ -51,7 +68,7 @@ export default function Category() {
                 aria-describedby="transition-modal-description"
                 className={classes.modal}
                 open={open}
-                onClose={handleClose}
+                // onClose={handleClose}
                 closeAfterTransition
                 BackdropComponent={Backdrop}
                 BackdropProps={{
@@ -80,9 +97,20 @@ export default function Category() {
                                         </InputAdornment>
                                     )
                                 }}
+                                onChange={(e) => setcategoryname(e.target.value)}
                             />
-                            <Input disableUnderline color="secondary" style={{ marginBottom: 10 }} type="file" />
-                            <Button variant="contained" fullWidth color="secondary" onClick={() => alert('hello')}>
+                            <Input
+                                disableUnderline
+                                color="secondary"
+                                style={{ marginBottom: 10 }}
+                                type="file"
+                                onChange={handleCategoryImage}
+                            />
+                            <Button
+                                variant="contained"
+                                fullWidth color="secondary"
+                                onClick={handleClose}
+                            >
                                 Add
                         </Button>
                         </Box>

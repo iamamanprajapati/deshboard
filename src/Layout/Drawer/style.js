@@ -33,6 +33,16 @@ const useStyles = makeStyles((theme) => ({
     listTypography: {
         fontFamily: theme.typography.fontFamily[4],
     },
+    header:{
+        [theme.breakpoints.up('sm')]: {
+            display:'none'
+          },
+    },
+    toolbar1:{
+        [theme.breakpoints.down('xs')]: {
+            display: 'none'
+          },
+    }
 
 }));
 

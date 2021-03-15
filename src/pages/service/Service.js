@@ -39,9 +39,7 @@ export default function Service() {
         setrowsperpage(event.target.value)
     }
 
-
     return (
-
         <Container className={classes.root}>
             <Toolbar />
             <Modal

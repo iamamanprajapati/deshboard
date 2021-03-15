@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import HomeIcon from '@material-ui/icons/Home';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { useDispatch, useSelector } from 'react-redux'
 import { drawerActionToFalse } from "../../actions/drawer.action";
 import { Link } from "react-router-dom";
@@ -36,7 +37,8 @@ const Drawer = () => {
 
     const drawerItems = (
         <>
-            <Toolbar variant="dense" />
+            <Typography color='primary' style={{ padding: 8 }} className={classes.header} variant="h5">Digital Aman</Typography>
+            <Toolbar className={classes.toolbar1} variant="dense" />
             <Divider />
             <List disablePadding className={classes.list}>
                 <ListItem button className={classes.listitem} style={{ backgroundColor: "#477EFA", }} alignItems="center" onClick={() => setOpenlist(!openlist)}>
@@ -44,9 +46,12 @@ const Drawer = () => {
                     <Typography className={classes.typography} style={{ marginLeft: 15, marginRight: 55 }} >
                         Dashboard
           </Typography>
-                    <ArrowRightIcon style={{ color: "white", }} fontSize="small" />
+                    {
+                        openlist ?
+                            <ArrowDropDownIcon style={{ color: "white", }} fontSize="small" /> :
+                            <ArrowRightIcon style={{ color: "white", }} fontSize="small" />
+                    }
                 </ListItem>
-
                 <Collapse in={openlist} >
                     <List disablePadding >
                         <ListItem className={classes.nestedItem} divider={true} >

@@ -21,6 +21,17 @@ export const getCategory = () => {
                 payload: { error: res && res.data && res.data.error }
             })
         }
+    }
+}
+
+export const addCategory = (form) => {
+    return async (dispatch) => {
+
+        dispatch({ type: categoryConstants.ADD_NEW_CATEGORY_REQUEST })
+
+        const res = await axios.post(`http://147.139.33.186/category/save`,form)
+
+        console.log(res)
 
 
     }

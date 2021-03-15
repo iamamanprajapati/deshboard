@@ -14,7 +14,6 @@ import Partners from './pages/partner/Partners'
 import Chart from './Layout/chart/Chart'
 
 
-
 function App() {
 
   const dispatch = useDispatch()
